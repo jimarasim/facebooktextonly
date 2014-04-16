@@ -6,3 +6,6 @@
  * and open the template in the editor.
  */
 
+//logout link
+$logoutUrl = $facebook->getLogoutUrl($logoutParams);
+echo("<a href='".$logoutUrl."'>Facebook Logout</a><br />");

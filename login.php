@@ -1,8 +1,25 @@
 <?php
+include 'codebase.php'; 
+require_once('codebase.php');
 
-/* 
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+$facebook = new Facebook($config);
+
+?>
+
+<html><head><title></title></head><body>
+<?php
+    try
+    {
+        LoginFacebook($facebook,$loginParams);
+        
+    }
+    catch(Exception $ex)
+    {
+        echo($ex->getMessage());
+    }
+
+?>
+</body></html>
+
+
 
