@@ -1,7 +1,23 @@
 <?php
-include '../facebook-php-sdk/src/facebook.php'; 
+//facebook sdk directory
+$facebookSdkFolder = "facebook-php-sdk";
 
-require_once("facebook.php");
+//this projects home page
+$homePage = "index.php";
+
+//include the facebook sdk.  Should be in the parent directory of this project as $facebookSdkFolder
+//realpath converts path correctly for windows or unix server
+$currentDirectory = realpath(dirname(__FILE__));
+//find the last occurrence of the DIRECTORY_SEPARATOR (/ or \\ depending on unix or windows)
+$lastSeparatorPosition = strripos($currentDirectory,DIRECTORY_SEPARATOR);
+//replace the current directory folder with the $facebookSdkFolder
+$facebookSdkDirectory = substr_replace($currentDirectory,$facebookSdkFolder,$lastSeparatorPosition+1);
+$facebookInclude = $facebookSdkDirectory.DIRECTORY_SEPARATOR.'src'.DIRECTORY_SEPARATOR.'facebook.php';
+include $facebookInclude;
+
+//url for facebook to call after logging in /out
+$lastSlashPosition = strripos(GetCurrentUrl(),'/');
+$homePageUrl = substr_replace(GetCurrentUrl(),$homePage,$lastSlashPosition+1);
 
 $config = array(
             'appId' => '631297493591205',
@@ -12,10 +28,10 @@ $config = array(
 
 $loginParams = array(
                 'scope' => 'read_stream, friends_likes',
-                'redirect_uri' => GetCurrentUrl()
+                'redirect_uri' => $homePageUrl
             );
 
-$logoutParams = array( 'next' => GetCurrentUrl());
+$logoutParams = array( 'next' => $homePageUrl);
 
 /**
  * this function gets the current url

@@ -1,6 +1,5 @@
 <?php
 include 'codebase.php'; 
-require_once('codebase.php');
 
 $facebook = new Facebook($config);
 

@@ -1,11 +1,14 @@
 <?php
+include 'codebase.php'; 
 
-/* 
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+$facebook = new Facebook($config);
 
-//logout link
-$logoutUrl = $facebook->getLogoutUrl($logoutParams);
-echo("<a href='".$logoutUrl."'>Facebook Logout</a><br />");
+//logout
+$facebook->destroySession();
+
+echo($facebook->getUser());
+
+session_destroy();
+
+header('Location: '.$facebook->getLogoutUrl($logoutParams));
+
