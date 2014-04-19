@@ -6,9 +6,11 @@ $facebook = new Facebook($config);
 //logout
 $facebook->destroySession();
 
-echo($facebook->getUser());
+?>
 
-session_destroy();
-
-header('Location: '.$facebook->getLogoutUrl($logoutParams));
+<html><head><title></title></head><body>
+<?php
+echo("<script>window.location='".$facebook->getLogoutUrl($logoutParams)."';</script>");
+?>
+</body></html>
 

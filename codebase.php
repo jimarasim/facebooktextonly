@@ -1,6 +1,8 @@
 <?php
+
 //facebook sdk directory
 $facebookSdkFolder = "facebook-php-sdk";
+
 
 //this projects home page
 $homePage = "index.php";
@@ -14,6 +16,7 @@ $lastSeparatorPosition = strripos($currentDirectory,DIRECTORY_SEPARATOR);
 $facebookSdkDirectory = substr_replace($currentDirectory,$facebookSdkFolder,$lastSeparatorPosition+1);
 $facebookInclude = $facebookSdkDirectory.DIRECTORY_SEPARATOR.'src'.DIRECTORY_SEPARATOR.'facebook.php';
 include $facebookInclude;
+
 
 //url for facebook to call after logging in /out
 $lastSlashPosition = strripos(GetCurrentUrl(),'/');

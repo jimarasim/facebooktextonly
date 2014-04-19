@@ -1,7 +1,15 @@
 <?php
 include 'codebase.php'; 
 
-$facebook = new Facebook($config);
+try 
+{
+    $facebook = new Facebook($config);
+}
+catch(Exception $ex)
+{
+    
+    echo($ex->getMessage());
+}
 ?>
 
 <html><head><title></title></head><body>
@@ -10,7 +18,7 @@ $facebook = new Facebook($config);
     {
         
         //get the user id
-        $user_id = $facebook->getUser();
+       $user_id = $facebook->getUser();
         
         if($user_id)
         {
@@ -25,16 +33,14 @@ $facebook = new Facebook($config);
         }
         else    
         {
-            header('Location: login.php');
+            
+            echo("<script> window.location='login.php'; </script>");
         }
-    }
-    catch(FacebookApiException $fex)
-    {
-        header('Location: login.php');
     }
     catch(Exception $ex)
     {
-        echo($ex->getMessage());
+        
+        echo('EXCEPTION CAUGHT:'.$ex->getMessage());
     }
 
 ?>
