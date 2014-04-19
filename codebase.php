@@ -30,7 +30,7 @@ $config = array(
         );
 
 $loginParams = array(
-                'scope' => 'read_stream, friends_likes',
+                'scope' => 'read_stream, read_friendlists',
                 'redirect_uri' => $homePageUrl
             );
 
