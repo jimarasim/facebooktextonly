@@ -1,11 +1,8 @@
 <?php
 include 'codebase.php'; 
 
-$facebook = new Facebook($config);
-
 //logout
 $facebook->destroySession();
-
 ?>
 
 <html><head><title></title></head><body>

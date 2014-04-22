@@ -1,5 +1,8 @@
 <?php
 
+//set the timezone
+date_default_timezone_set("America/Los_Angeles");
+
 //facebook sdk directory
 $facebookSdkFolder = "facebook-php-sdk";
 
@@ -16,7 +19,6 @@ $lastSeparatorPosition = strripos($currentDirectory,DIRECTORY_SEPARATOR);
 $facebookSdkDirectory = substr_replace($currentDirectory,$facebookSdkFolder,$lastSeparatorPosition+1);
 $facebookInclude = $facebookSdkDirectory.DIRECTORY_SEPARATOR.'src'.DIRECTORY_SEPARATOR.'facebook.php';
 include $facebookInclude;
-
 
 //url for facebook to call after logging in /out
 $lastSlashPosition = strripos(GetCurrentUrl(),'/');
@@ -35,6 +37,11 @@ $loginParams = array(
             );
 
 $logoutParams = array( 'next' => $homePageUrl);
+
+
+
+$facebook = new Facebook($config);
+
 
 /**
  * this function gets the current url
@@ -58,6 +65,17 @@ function GetCurrentUrl()
 function LoginFacebook($facebook,$loginParams)
 {
     $loginurl = $facebook->getLoginUrl($loginParams);
-    echo("Please Login through Facebook:<a href='".$loginurl."'>Facebook Login</a><br />");
+    echo("<a href='".$loginurl."'>Facebook Login</a>");
+}
+
+/**
+ * This function checks for access to facebook
+ */
+function CheckAccess($facebook)
+{
+    //get the user id
+    $user_id = $facebook->getUser();
+
+    return $user_id;
 }
 

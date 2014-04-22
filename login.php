@@ -1,22 +1,18 @@
 <?php
 include 'codebase.php'; 
-
-$facebook = new Facebook($config);
-
+if(CheckAccess($facebook))
+{
+   header('Location: index.php');
+}
 ?>
 
-<html><head><title></title></head><body>
+<html><head><title>Text Only Facebook</title>
+<link rel="Stylesheet" href="stylebase.css" />
+<!--<link rel="Shortcut Icon" href="jaemzware.ico" />-->
+<script type="text/javascript" src="codebase.js"></script>    
+</head><body id='loginpage'>
 <?php
-    try
-    {
-        LoginFacebook($facebook,$loginParams);
-        
-    }
-    catch(Exception $ex)
-    {
-        echo($ex->getMessage());
-    }
-
+    LoginFacebook($facebook,$loginParams);
 ?>
 </body></html>
 
