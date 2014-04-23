@@ -18,29 +18,54 @@ else
 </head><body><script type="text/javascript">HeaderLinks();</script>
 <?php
     
-    //display statuses in last 24 hours
-    $statuses = $facebook->api(array(
-        "method"    => "fql.query",
-        "query"     => "SELECT post_id, actor_id, message, description
-                        FROM stream 
-                        WHERE filter_key in (
-                             SELECT filter_key 
-                             FROM stream_filter
-                             WHERE uid=me() AND type='newsfeed'
-                       ) AND is_hidden = 0 LIMIT 50"
-    ));
+    $multiQuery = array(
+    "query1" => "SELECT post_id, actor_id, message, description, permalink
+                            FROM stream 
+                            WHERE filter_key in (
+                                 SELECT filter_key 
+                                 FROM stream_filter
+                                 WHERE uid=me() AND type='newsfeed'
+                           ) AND is_hidden = 0 LIMIT 20",
+    "query2"    => "SELECT uid, name FROM user 
+                            WHERE uid IN (SELECT actor_id FROM #query1)"
+    );
 
-    echo("<table><th colspan=2>".$user_profile['name']." - NewsFeed</th>");
-    foreach ($statuses as $statusArray) 
+    $statuses = $facebook->api(array(
+          "method"    => "fql.multiquery",
+          "queries"     => $multiQuery
+
+      ));
+
+    echo("<table><th colspan=3>".$user_profile['name']." - NewsFeed</th>");
+    foreach ($statuses[0]["fql_result_set"] as $statusArray) 
     {
-        echo ("<tr><td>Post_id: ".$statusArray['post_id']."</td><td>Actor_id: "
-                .$statusArray['actor_id']."</td><td>Status:"
-                .$statusArray['message']."</td><td>Description:"
-                .$statusArray['description']."</td></tr>");
+        $name="";
+        foreach($statuses[1]["fql_result_set"] as $index => $nameArray)
+        {
+            if($nameArray["uid"]==$statusArray["actor_id"])
+            {
+                $name = $statuses[1]["fql_result_set"][$index]["name"];
+                break;
+            }
+        }
+        echo('<tr><td>'.$name.'</td><td>');
+        if(isset($statusArray["message"]))
+        {
+            echo($statusArray["message"]);
+        }
+        if(isset($statusArray["description"]))
+        {
+            echo("[".$statusArray["description"]."]");
+        }
+        if(isset($statusArray["permalink"])&&!empty($statusArray["permalink"]))
+        {
+            echo("(<a href='".$statusArray["permalink"]."' target='_blank'>more</a>)");
+        }
+        echo('</td></tr>');
     }
     echo('</table>');
-
-
+  
+  
 ?>
 </body></html>
 

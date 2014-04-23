@@ -13,7 +13,7 @@ function HeaderLinks()
             ];
        
     //write outo header
-    document.write("<h1>Text Only Facebook</h1>");
+    document.write("<h3>Text Only Facebook</h3>");
     
     //write out the links
     var link;

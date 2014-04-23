@@ -18,25 +18,8 @@ else
 </head><body><script type="text/javascript">HeaderLinks();</script>
 <?php
     
-$multiQuery = array(
-"query1" => "SELECT post_id, actor_id, message, description
-                        FROM stream 
-                        WHERE filter_key in (
-                             SELECT filter_key 
-                             FROM stream_filter
-                             WHERE uid=me() AND type='newsfeed'
-                       ) AND is_hidden = 0 LIMIT 50",
-"query2"    => "SELECT uid, name FROM user 
-                        WHERE uid IN (SELECT actor_id FROM #query1)"
-);
-
-$statuses = $facebook->api(array(
-      "method"    => "fql.multiquery",
-      "queries"     => $multiQuery
-
-  ));
-
-  echo("here");
+    echo("this page reserved for testing purposes... it may get funky");
+  
   
 ?>
 </body></html>
