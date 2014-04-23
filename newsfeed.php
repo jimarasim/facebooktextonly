@@ -19,13 +19,13 @@ else
 <?php
     
     $multiQuery = array(
-    "query1" => "SELECT post_id, actor_id, message, description, permalink
+    "query1" => "SELECT post_id, actor_id, message, description, permalink, created_time
                             FROM stream 
                             WHERE filter_key in (
                                  SELECT filter_key 
                                  FROM stream_filter
                                  WHERE uid=me() AND type='newsfeed'
-                           ) AND is_hidden = 0 LIMIT 20",
+                           ) AND is_hidden = 0 ORDER BY created_time DESC LIMIT 100",
     "query2"    => "SELECT uid, name FROM user 
                             WHERE uid IN (SELECT actor_id FROM #query1)"
     );
@@ -61,7 +61,9 @@ else
         {
             echo("(<a href='".$statusArray["permalink"]."' target='_blank'>more</a>)");
         }
-        echo('</td></tr>');
+        echo('</td>');
+        echo('<td>'.date("Ymd H:i",$statusArray["created_time"]).'</td>');
+        echo('</tr>');
     }
     echo('</table>');
   

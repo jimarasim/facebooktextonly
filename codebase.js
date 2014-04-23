@@ -6,8 +6,8 @@ function HeaderLinks()
     var homeLinks = 
             [
                 {"atext":"Home","ahref":"index.php"},
-                {"atext":"Most Popular","ahref":"mostpopular.php"},
                 {"atext":"News Feed","ahref":"newsfeed.php"},
+                {"atext":"Friends","ahref":"friends.php"},
                 {"atext":"Scratch","ahref":"scratch.php"},
                 {"atext":"Logout","ahref":"logout.php"}
             ];

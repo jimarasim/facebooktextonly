@@ -20,10 +20,10 @@ else
     //display friends data
     $friends = $facebook->api(array(
         "method"    => "fql.query",
-        "query"     => "SELECT uid,name,friend_count FROM user WHERE uid IN (SELECT uid2 FROM friend WHERE uid1 = me()) ORDER BY friend_count DESC"
+        "query"     => "SELECT uid,name,friend_count FROM user WHERE uid IN (SELECT uid2 FROM friend WHERE uid1 = me()) ORDER BY name"
     ));
 
-    echo("<table><th colspan=2>".$user_profile['name']." - Most Popular Friends</th>");
+    echo("<table><th colspan=2>".$user_profile['name']." - Friends</th>");
     foreach ($friends as $friendArray) 
     {
         echo ("<tr><td>Name: ".$friendArray['name']."</td><td>Friends:".$friendArray['friend_count']."</td></tr>");
