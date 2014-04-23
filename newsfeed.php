@@ -13,7 +13,7 @@ else
 
 <html><head><title>Text Only Facebook</title>
 <link rel="Stylesheet" href="stylebase.css" />
-<!--<link rel="Shortcut Icon" href="jaemzware.ico" />-->
+<link rel="Shortcut Icon" href="ocean.ico" />
 <script type="text/javascript" src="codebase.js"></script>    
 </head><body><script type="text/javascript">HeaderLinks();</script>
 <?php

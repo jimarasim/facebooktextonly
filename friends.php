@@ -13,7 +13,7 @@ else
 
 <html><head><title>Text Only Facebook</title>
 <link rel="Stylesheet" href="stylebase.css" />
-<!--<link rel="Shortcut Icon" href="jaemzware.ico" />-->
+<link rel="Shortcut Icon" href="ocean.ico" />
 <script type="text/javascript" src="codebase.js"></script>    
 </head><body><script type="text/javascript">HeaderLinks();</script>
 <?php
@@ -26,7 +26,7 @@ else
     echo("<table><th colspan=2>".$user_profile['name']." - Friends</th>");
     foreach ($friends as $friendArray) 
     {
-        echo ("<tr><td>Name: ".$friendArray['name']."</td><td>Friends:".$friendArray['friend_count']."</td></tr>");
+        echo ("<tr><td>Name: <a href='http://facebook.com/profile.php?id=".$friendArray['uid']."' target='_blank'>".$friendArray['name']."</a></td><td>Friends:".$friendArray['friend_count']."</td></tr>");
     }
     echo('</table>');
 
