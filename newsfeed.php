@@ -18,6 +18,9 @@ else
 </head><body><script type="text/javascript">HeaderLinks();</script>
 <?php
     
+try {
+    
+
     $multiQuery = array(
     "query1" => "SELECT post_id, actor_id, message, description, permalink, created_time
                             FROM stream 
@@ -39,16 +42,16 @@ else
     echo("<table><th colspan=3>".$user_profile['name']." - NewsFeed</th>");
     foreach ($statuses[0]["fql_result_set"] as $statusArray) 
     {
-        $name="";
         foreach($statuses[1]["fql_result_set"] as $index => $nameArray)
         {
             if($nameArray["uid"]==$statusArray["actor_id"])
             {
                 $name = $statuses[1]["fql_result_set"][$index]["name"];
+                $uid = $statuses[1]["fql_result_set"][$index]["uid"];
                 break;
             }
         }
-        echo('<tr><td>'.$name.'</td><td>');
+        echo("<tr><td><a href='http://facebook.com/profile.php?id=".$uid."' target='_blank'>".$name."</a></td><td>");
         if(isset($statusArray["message"]))
         {
             echo($statusArray["message"]);
@@ -66,7 +69,9 @@ else
         echo('</tr>');
     }
     echo('</table>');
-  
+  } catch (Exception $ex) {
+    echo("THERE WAS AN UNEXPECTED ISSUE:".$ex->getMessage());
+}
   
 ?>
 </body></html>

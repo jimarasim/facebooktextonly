@@ -29,6 +29,8 @@ else
         echo ("<tr><td>Name: <a href='http://facebook.com/profile.php?id=".$friendArray['uid']."' target='_blank'>".$friendArray['name']."</a></td><td>Friends:".$friendArray['friend_count']."</td></tr>");
     }
     echo('</table>');
+    
+    echo("<script>var friendarray = ".json_encode($friends)."</script>");
 
 
 ?>
