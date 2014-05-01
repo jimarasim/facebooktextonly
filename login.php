@@ -14,6 +14,9 @@ if(CheckAccess($facebook))
 <?php
     LoginFacebook($facebook,$loginParams);
 ?>
+    <hr>
+    This site renders text only pages of your Facebook newsfeed and friends list.  Other features will be added as time goes on.<br />
+    Your data will not be stored or tracked by this site in any way.
 </body></html>
 
 
