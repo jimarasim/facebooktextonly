@@ -21,16 +21,20 @@ else
     
 try {
     
-    //$uid="1220353095";
     $uid=filter_input(INPUT_GET,('uid'));
+    //$uid=100001524585007;
+    
     
     if(!isset($uid)||empty($uid))
     {
         throw new Exception("INVALID UID");
     }
+    
+    $profile=$facebook->api('/'.$uid,'GET');
+    $username = $profile["username"];
 
     $multiQuery = array(
-    "query1" => "SELECT uid,message,time
+    "query1" => "SELECT uid,message,time,status_id
                             FROM status 
                             WHERE uid = ".$uid." ORDER BY time DESC LIMIT 100",
     "query2"    => "SELECT uid, name FROM user 
@@ -58,6 +62,7 @@ try {
         $uid = $statusArray["uid"];
         $message = $statusArray["message"];
         $time = $statusArray["time"];
+        $status_id = $statusArray["status_id"];
         
         echo("<tr>");
         echo("<td><a href='http://facebook.com/profile.php?id=".$uid."' target='_blank'>".$name."</a></td>");
@@ -67,6 +72,7 @@ try {
             echo($message);
         }
         echo("</td>");
+        echo("<td><a href='http://facebook.com/".$username."/posts/".$status_id."' target='_blank'>(more)</a></td>");
         echo('<td>'.date("Ymd H:i",$time).'</td>');
         echo('</tr>');
         
@@ -75,6 +81,7 @@ try {
                 array("name"=>$name,
                     "uid"=>$uid,
                     "message"=>$message,
+                    "status_id"=>$status_id,
                     "time"=>$time);
     }
     echo('</table>');
@@ -121,7 +128,7 @@ try {
             for (var i=0;i<sorted.length;i++)
             { 
                 //update the table
-                row = GetStatusRow(sorted[i].name,sorted[i].uid,sorted[i].message, sorted[i].time);
+                row = GetStatusRow(sorted[i].name,sorted[i].uid,sorted[i].message,sorted[i].status_id, sorted[i].time);
                 $("#statusTable").append(row);
             }
         });
@@ -144,7 +151,7 @@ try {
             for (var i=0;i<sorted.length;i++)
             { 
                 //update the table
-                row = GetStatusRow(sorted[i].name,sorted[i].uid,sorted[i].message,sorted[i].time);
+                row = GetStatusRow(sorted[i].name,sorted[i].uid,sorted[i].message,sorted[i].status_id,sorted[i].time);
                 $("#statusTable").append(row);
             }
         });
@@ -158,7 +165,7 @@ try {
      * @param {type} time
      * @returns {String}
      */
-    function GetStatusRow(name, uid,message, time)
+    function GetStatusRow(name, uid,message,status_id, time)
     {
         ///build table row in a message string
         var messageString = "<tr><td><a href='http://facebook.com/profile.php?id="+uid+"' target='_blank'>"+name+"</a></td>";
@@ -169,7 +176,7 @@ try {
         }
         
         messageString+='</td>';
-        
+        messageString+="<td><a href='http://facebook.com?statusid="+status_id+"' target='_blank'>(more)</a></td>");
         messageString+='<td>'+time+'</td>';
         messageString+='</tr>';
 
