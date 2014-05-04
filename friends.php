@@ -31,7 +31,12 @@ else
     foreach ($friends as $friendArray) 
     {
         //write out a row
-        echo ("<tr><td>Name: <a href='http://facebook.com/profile.php?id=".$friendArray['uid']."' target='_blank'>".$friendArray['name']."</a></td><td>Friends:".$friendArray['friend_count']."</td></tr>");
+        $row = "<tr><td>Name: <a href='http://facebook.com/profile.php?id=".$friendArray['uid'];
+        $row .= "' target='_blank'>".$friendArray['name']."</a>";
+        $row .= "&nbsp<a href=statushistory.php?uid=".$friendArray['uid'].">(statuses)</a>";
+        $row .= "</td><td>Friends:";
+        $row .= $friendArray['friend_count']."</td></tr>";
+        echo ($row);
     }
     echo('</table>');
     
@@ -71,11 +76,7 @@ else
             //update the table
             for (var i=0;i<sorted.length;i++)
             { 
-                $("#friendTable").append(
-                        "<tr><td>Name: <a href='http://facebook.com/profile.php?id="+
-                        sorted[i].uid+"' target='_blank'>"+
-                        sorted[i].name+"</a></td><td>Friends:"+
-                        sorted[i].friend_count+"</td></tr>");
+                $("#friendTable").append(GetStatusRow(sorted[i].uid,sorted[i].name,sorted[i].friend_count));
             }
 
         });
@@ -96,13 +97,22 @@ else
             //update the table
             for (var i=0;i<sorted.length;i++)
             { 
-                $("#friendTable").append(
-                        "<tr><td>Name: <a href='http://facebook.com/profile.php?id="+
-                        sorted[i].uid+"' target='_blank'>"+
-                        sorted[i].name+"</a></td><td>Friends:"+
-                        sorted[i].friend_count+"</td></tr>");
+                $("#friendTable").append(GetStatusRow(sorted[i].uid,sorted[i].name,sorted[i].friend_count));
             }
         });
+    }
+    
+    function GetStatusRow(uid,name,friend_count)
+    {
+        ///build table row in a message string
+        var messageString = "<tr><td>Name: <a href='http://facebook.com/profile.php?id="+
+                        uid+"' target='_blank'>"+
+                        "&nbsp<a href=statushistory.php?uid="+uid+">(statuses)</a>"+
+                        name+"</a></td><td>Friends:"+
+                        friend_count+"</td></tr>";
+
+        //update the table
+        return messageString;
     }
 </script>
 </body></html>

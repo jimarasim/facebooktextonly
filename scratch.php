@@ -20,6 +20,7 @@ else
     
     echo("this page reserved for testing purposes... it may get funky");
   
+    header('Location: statushistory.php');
   
 ?>
 </body></html>
