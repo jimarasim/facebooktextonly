@@ -21,7 +21,7 @@ else
     
 try {
     
-
+    //Query for newsfeed, and the user name associated with each post
     $multiQuery = array(
     "query1" => "SELECT post_id, actor_id, message, description, permalink, created_time
                             FROM stream 
@@ -30,7 +30,7 @@ try {
                                  FROM stream_filter
                                  WHERE uid=me() AND type='newsfeed'
                            ) AND is_hidden = 0 ORDER BY created_time DESC LIMIT 100",
-    "query2"    => "SELECT uid, name FROM user 
+    "query2"    => "SELECT uid, name, pic FROM user 
                             WHERE uid IN (SELECT actor_id FROM #query1)"
     );
 
@@ -54,6 +54,7 @@ try {
             {
                 $name = $statuses[1]["fql_result_set"][$index]["name"];
                 $uid = $statuses[1]["fql_result_set"][$index]["uid"];
+                $pic = $statuses[1]["fql_result_set"][$index]["pic"];
                 break;
             }
         }
@@ -64,7 +65,7 @@ try {
         $permalink = $statusArray["permalink"];
         $created_time  = $statusArray["created_time"];
         
-        echo("<tr><td><a href='http://facebook.com/profile.php?id=".$uid."' target='_blank'>".$name."</a></td>");
+        echo("<tr><td><img src='".$pic."' /></td><td><a href='http://facebook.com/profile.php?id=".$uid."' target='_blank'>".$name."</a></td>");
         echo("<td>");
         if(isset($message))
         {
@@ -81,13 +82,14 @@ try {
             echo("(<a href='".$permalink."' target='_blank'>more</a>)");
         }
         echo('</td>');
-        echo('<td>'.date("Ymd H:i",$created_time).'</td>');
+        echo('<td title="'.$created_time.'">'.date("Ymd H:i",$created_time).'</td>');
         echo('</tr>');
         
         //create array of json objects
         $newsFeedArray[$statusArrayIndex]=
                 array("name"=>$name,
                     "uid"=>$uid,
+                    "pic"=>$pic,
                     "message"=>$message,
                     "description"=>$description,
                     "permalink"=>$permalink,
@@ -137,7 +139,7 @@ try {
             for (var i=0;i<sorted.length;i++)
             { 
                 //update the table
-                row = GetStatusRow(sorted[i].name,sorted[i].uid,sorted[i].message, sorted[i].description, sorted[i].permalink, sorted[i].created_time);
+                row = GetStatusRow(sorted[i].pic,sorted[i].name,sorted[i].uid,sorted[i].message, sorted[i].description, sorted[i].permalink, sorted[i].created_time);
                 $("#statusTable").append(row);
         
             }
@@ -162,7 +164,7 @@ try {
             for (var i=0;i<sorted.length;i++)
             { 
                 //update the table
-                row = GetStatusRow(sorted[i].name,sorted[i].uid,sorted[i].message, sorted[i].description, sorted[i].permalink, sorted[i].created_time);
+                row = GetStatusRow(sorted[i].pic,sorted[i].name,sorted[i].uid,sorted[i].message, sorted[i].description, sorted[i].permalink, sorted[i].created_time);
                 $("#statusTable").append(row);
             }
         });
@@ -185,16 +187,16 @@ try {
             for (var i=0;i<sorted.length;i++)
             { 
                 //update the table
-                row = GetStatusRow(sorted[i].name,sorted[i].uid,sorted[i].message, sorted[i].description, sorted[i].permalink, sorted[i].created_time);
+                row = GetStatusRow(sorted[i].pic,sorted[i].name,sorted[i].uid,sorted[i].message, sorted[i].description, sorted[i].permalink, sorted[i].created_time);
                 $("#statusTable").append(row);
             }
         });
     }
     
-    function GetStatusRow(name, uid,message, description, permalink, created_time)
+    function GetStatusRow(pic,name, uid,message, description, permalink, created_time)
     {
         ///build table row in a message string
-        var messageString = "<tr><td><a href='http://facebook.com/profile.php?id="+uid+"' target='_blank'>"+name+"</a></td>";
+        var messageString = "<tr><td><img src='"+pic+"' /></td><td><a href='http://facebook.com/profile.php?id="+uid+"' target='_blank'>"+name+"</a></td>";
         messageString+="<td>";
         if(message)
         {

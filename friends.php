@@ -21,7 +21,7 @@ else
     //display friends data
     $friends = $facebook->api(array(
         "method"    => "fql.query",
-        "query"     => "SELECT uid,name,friend_count FROM user WHERE uid IN (SELECT uid2 FROM friend WHERE uid1 = me()) ORDER BY name"
+        "query"     => "SELECT uid,name,friend_count,pic FROM user WHERE uid IN (SELECT uid2 FROM friend WHERE uid1 = me()) ORDER BY name"
     ));
 
     
@@ -31,7 +31,8 @@ else
     foreach ($friends as $friendArray) 
     {
         //write out a row
-        $row = "<tr><td>Name: <a href='http://facebook.com/profile.php?id=".$friendArray['uid'];
+        $row = "<tr><td><img src='".$friendArray['pic']."' /></td>";
+        $row .= "<td>Name: <a href='http://facebook.com/profile.php?id=".$friendArray['uid'];
         $row .= "' target='_blank'>".$friendArray['name']."</a>";
         $row .= "&nbsp<a href=statushistory.php?uid=".$friendArray['uid'].">(statuses)</a>";
         $row .= "</td><td>Friends:";
@@ -76,7 +77,7 @@ else
             //update the table
             for (var i=0;i<sorted.length;i++)
             { 
-                $("#friendTable").append(GetStatusRow(sorted[i].uid,sorted[i].name,sorted[i].friend_count));
+                $("#friendTable").append(GetStatusRow(sorted[i].pic,sorted[i].uid,sorted[i].name,sorted[i].friend_count));
             }
 
         });
@@ -97,19 +98,18 @@ else
             //update the table
             for (var i=0;i<sorted.length;i++)
             { 
-                $("#friendTable").append(GetStatusRow(sorted[i].uid,sorted[i].name,sorted[i].friend_count));
+                $("#friendTable").append(GetStatusRow(sorted[i].pic,sorted[i].uid,sorted[i].name,sorted[i].friend_count));
             }
         });
     }
     
-    function GetStatusRow(uid,name,friend_count)
+    function GetStatusRow(pic,uid,name,friend_count)
     {
         ///build table row in a message string
-        var messageString = "<tr><td>Name: <a href='http://facebook.com/profile.php?id="+
-                        uid+"' target='_blank'>"+
-                        "&nbsp<a href=statushistory.php?uid="+uid+">(statuses)</a>"+
-                        name+"</a></td><td>Friends:"+
-                        friend_count+"</td></tr>";
+        var messageString = "<tr><td><img src='"+pic+"' /></td>";
+        messageString += "<td>Name: <a href='http://facebook.com/profile.php?id="+uid+"' target='_blank'>"+name+"</a>";
+        messageString += "&nbsp<a href=statushistory.php?uid="+uid+">(statuses)</a></td>";
+        messageString += "<td>Friends:"+friend_count+"</td></tr>";
 
         //update the table
         return messageString;

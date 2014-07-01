@@ -162,6 +162,7 @@ try {
      * @param {type} name
      * @param {type} uid
      * @param {type} message
+     * @param {type} status_id
      * @param {type} time
      * @returns {String}
      */
