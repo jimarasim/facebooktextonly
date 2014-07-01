@@ -1,5 +1,7 @@
 <?php
 include 'codebase.php'; 
+
+
 if(!CheckAccess($facebook))
 {
    header('Location: login.php');
@@ -19,6 +21,25 @@ else
 <?php
     
     echo("this page reserved for testing purposes... it may get funky");
+    
+    ////////////////////////////////////////////////////////////////////
+    // Upload a photo to a user’s profile
+    // Your app needs publish_actions permission for this to work
+//    $facebook->setFileUploadSupport(true);
+//
+//    $img = 'images/jim.jpg';
+//
+//    $photo = $facebook->api(
+//      '/me/photos', 
+//      'POST',
+//      array(
+//        'source' => '@' . $img,
+//        'message' => 'Photo uploaded via the PHP SDK!'
+//      )
+//    );
+    ////////////////////////////////////////////////////////////////////
+
+
   
   
 ?>

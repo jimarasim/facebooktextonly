@@ -176,7 +176,7 @@ try {
         }
         
         messageString+='</td>';
-        messageString+="<td><a href='http://facebook.com?statusid="+status_id+"' target='_blank'>(more)</a></td>");
+        messageString+="<td><a href='http://facebook.com?statusid="+status_id+"' target='_blank'>(more)</a></td>";
         messageString+='<td>'+time+'</td>';
         messageString+='</tr>';
 
