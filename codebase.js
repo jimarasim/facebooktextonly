@@ -26,4 +26,23 @@ function HeaderLinks()
     
 }
 
+//this function returns a javascript date from a unix date stamp
+function DateTimeFromUnixTimeStamp(unixTimeStamp)
+{
+            
+    //make a normal looking date format
+    //unix timestamp is in seconds, but javascript date object goes down to milliseconds
+    var javascriptMilliseconds = unixTimeStamp*1000;
+    var javascriptDate = new Date(javascriptMilliseconds);
+    var month = javascriptDate.getMonth();
+    var day = javascriptDate.getDay();
+    var year = javascriptDate.getFullYear();
+    var hour = javascriptDate.getHours();
+    var minute = javascriptDate.getMinutes();
+
+    var dateString = month+"/"+day+"/"+year+" "+hour+":"+minute;
+    
+    return dateString;
+}
+
 
