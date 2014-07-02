@@ -82,7 +82,7 @@ try {
             echo("(<a href='".$permalink."' target='_blank'>more</a>)");
         }
         echo('</td>');
-        echo('<td title="'.$created_time.'">'.date("Ymd H:i",$created_time).'</td>');
+        echo('<td>'.date("m/d/Y H:i",$created_time).'</td>');
         echo('</tr>');
         
         //create array of json objects
@@ -175,11 +175,11 @@ try {
             //clear the table
             $('#statusTable').empty();
 
-            //sort the newsfeed by date
+            //sort the newsfeed by date descending
             var sorted = newsfeedarray.sort(function(a, b){
                 var a1= a.created_time, b1= b.created_time;
                 if(a1=== b1) return 0;
-                return a1> b1? 1: -1;
+                return a1< b1? 1: -1;
             });
 
             //update the table
@@ -193,6 +193,7 @@ try {
         });
     }
     
+    //this function formats a row of status table data, given the provided input
     function GetStatusRow(pic,name, uid,message, description, permalink, created_time)
     {
         ///build table row in a message string
@@ -213,13 +214,15 @@ try {
             messageString+="(<a href='"+permalink+"' target='_blank'>more</a>)";
         }
         messageString+='</td>';
-        
-        messageString+='<td>'+created_time+'</td>';
+
+        messageString+='<td>'+DateTimeFromUnixTimeStamp(created_time)+'</td>';
         messageString+='</tr>';
 
         //update the table
         return messageString;
     }
+    
+    
     
 </script>
 </body></html>
