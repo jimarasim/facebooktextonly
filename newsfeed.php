@@ -29,7 +29,7 @@ try {
                                  SELECT filter_key 
                                  FROM stream_filter
                                  WHERE uid=me() AND type='newsfeed'
-                           ) AND is_hidden = 0 ORDER BY created_time DESC LIMIT 100",
+                           ) AND is_hidden = 0 ORDER BY created_time DESC LIMIT 50",
     "query2"    => "SELECT uid, name, pic FROM user 
                             WHERE uid IN (SELECT actor_id FROM #query1)"
     );
@@ -50,6 +50,13 @@ try {
         //get $name and $uid, for initial display and serialization, for given actor_id
         foreach($statuses[1]["fql_result_set"] as $index => $nameArray)
         {
+            if(empty($nameArray["uid"])||empty($statusArray["actor_id"]))
+            {
+                $name = "";
+                $uid = "";
+                $pic = "";
+                continue;
+            }
             if($nameArray["uid"]==$statusArray["actor_id"])
             {
                 $name = $statuses[1]["fql_result_set"][$index]["name"];
@@ -67,22 +74,27 @@ try {
         
         echo("<tr><td><img src='".$pic."' /></td><td><a href='http://facebook.com/profile.php?id=".$uid."' target='_blank'>".$name."</a></td>");
         echo("<td>");
+        echo("<em>".date("m/d/Y H:i",$created_time)."</em><br />");
         if(isset($message))
         {
+            echo("MESSAGE:");
             echo($message);
+            echo("<br />");
         }
-        echo("</td><td>");
+        
         if(isset($description))
         {
+            echo("DESCRIPTION:");
             echo("[".$description."]");
+            echo("<br />");
         }
-        echo("</td><td>");
+        
         if(isset($permalink)&&!empty($permalink))
         {
             echo("(<a href='".$permalink."' target='_blank'>more</a>)");
         }
         echo('</td>');
-        echo('<td>'.date("m/d/Y H:i",$created_time).'</td>');
+
         echo('</tr>');
         
         //create array of json objects
@@ -198,24 +210,48 @@ try {
     {
         ///build table row in a message string
         var messageString = "<tr><td><img src='"+pic+"' /></td><td><a href='http://facebook.com/profile.php?id="+uid+"' target='_blank'>"+name+"</a></td>";
+        
         messageString+="<td>";
+        messageString+='<em>'+DateTimeFromUnixTimeStamp(created_time)+'</em><br />';
         if(message)
         {
+            messageString+="MESSAGE:";
             messageString+=message;
+            messageString+="<br />";
         }
-        messageString+="</td><td>";
         if(description)
         {
+            messageString+="DESCRIPTION:";
             messageString+="["+description+"]";
+            messageString+="<br />";
         }
-        messageString+="</td><td>";
+        
         if(permalink)
         {
             messageString+="(<a href='"+permalink+"' target='_blank'>more</a>)";
         }
         messageString+='</td>';
 
-        messageString+='<td>'+DateTimeFromUnixTimeStamp(created_time)+'</td>';
+        
+      
+//        messageString+="<td>";
+//        if(message)
+//        {
+//            messageString+=message;
+//        }
+//        messageString+="</td><td>";
+//        if(description)
+//        {
+//            messageString+="["+description+"]";
+//        }
+//        messageString+="</td><td>";
+//        if(permalink)
+//        {
+//            messageString+="(<a href='"+permalink+"' target='_blank'>more</a>)";
+//        }
+//        messageString+='</td>';
+//
+//        messageString+='<td>'+DateTimeFromUnixTimeStamp(created_time)+'</td>';
         messageString+='</tr>';
 
         //update the table

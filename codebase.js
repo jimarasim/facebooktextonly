@@ -39,6 +39,9 @@ function DateTimeFromUnixTimeStamp(unixTimeStamp)
     var year = javascriptDate.getFullYear();
     var hour = javascriptDate.getHours();
     var minute = javascriptDate.getMinutes();
+    
+    if(month<10)month="0"+month;
+    if(day<10)day="0"+day;
 
     var dateString = month+"/"+day+"/"+year+" "+hour+":"+minute;
     
