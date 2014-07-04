@@ -14,6 +14,7 @@ function HeaderLinks()
        
     //write outo header
     document.write("<h3>Text Only Facebook</h3>");
+    document.write("<em>comments/suggestions/issues contact <a href='mailto:jim@seattlerules.com'>jim@seattlerules.com</a></em>");
     
     //write out the links
     var link;

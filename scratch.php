@@ -20,7 +20,7 @@ else
 </head><body><script type="text/javascript">HeaderLinks();</script>
 <?php
     
-    echo("this page reserved for testing purposes... it may get funky");
+    echo("<h2 style='color:red;'>this page reserved for testing purposes... it may get funky</h2>");
     
     ////////////////////////////////////////////////////////////////////
     // Upload a photo to a user’s profile
