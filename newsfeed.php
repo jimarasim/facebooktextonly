@@ -47,17 +47,15 @@ try {
     echo("<table id='statusTable'>");
     foreach ($statuses[0]["fql_result_set"] as $statusArrayIndex => $statusArray) 
     {
+        //clear these out, in case there are no matches
+        $name = "";
+        $uid = "";
+        $pic = "";
         
         //get $name and $uid, for initial display and serialization, for given actor_id
         foreach($statuses[1]["fql_result_set"] as $index => $nameArray)
         {
-            if(empty($nameArray["uid"])||empty($statusArray["actor_id"]))
-            {
-                $name = "";
-                $uid = "";
-                $pic = "";
-                continue;
-            }
+            
             if($nameArray["uid"]==$statusArray["actor_id"])
             {
                 $name = $statuses[1]["fql_result_set"][$index]["name"];
@@ -74,10 +72,10 @@ try {
         $created_time  = $statusArray["created_time"];
         
         //trying to fix issue of page posts showing user names
-//        if(strrpos($message, "http://www.riceandbreadmagazine.com/five-under-appreciated-dc-hardcore-bands/")>=0)
-//        {
-//            echo("");
-//        }
+        if(strrpos($message, "In case you missed it, listen to a stream of Jack’s BBC Radio")>-1)
+        {
+            echo("");
+        }
         
         echo("<tr><td><img src='".$pic."' /></td><td><a href='http://facebook.com/profile.php?id=".$uid."' target='_blank'>".$name."</a></td>");
         echo("<td>");
