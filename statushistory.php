@@ -72,7 +72,7 @@ try {
             echo($message);
         }
         echo("</td>");
-        echo("<td><a href='http://facebook.com/".$username."/posts/".$status_id."' target='_blank'>(more)</a></td>");
+        echo("<td><a href='http://facebook.com/".$username."/posts/".$status_id."' target='_blank'>Actual Post</a></td>");
         echo('<td>'.date("Ymd H:i",$time).'</td>');
         echo('</tr>');
         
@@ -177,8 +177,8 @@ try {
         }
         
         messageString+='</td>';
-        messageString+="<td><a href='http://facebook.com?statusid="+status_id+"' target='_blank'>(more)</a></td>";
-        messageString+='<td>'+time+'</td>';
+        messageString+="<td><a href='http://facebook.com?statusid="+status_id+"' target='_blank'>Actual Post</a></td>";
+        messageString+='<td>'+DateTimeFromUnixTimeStamp(time)+'</td>';
         messageString+='</tr>';
 
         //update the table

@@ -96,7 +96,7 @@ try {
         
         if(isset($permalink)&&!empty($permalink))
         {
-            echo("(<a href='".$permalink."' target='_blank'>more</a>)");
+            echo("<a href='".$permalink."' target='_blank'>Actual Post</a>");
         }
         echo('</td>');
 
@@ -233,7 +233,7 @@ try {
         
         if(permalink)
         {
-            messageString+="(<a href='"+permalink+"' target='_blank'>more</a>)";
+            messageString+="<a href='"+permalink+"' target='_blank'>Actual Post</a>";
         }
         messageString+='</td>';
 
