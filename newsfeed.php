@@ -237,26 +237,7 @@ try {
         }
         messageString+='</td>';
 
-        
-      
-//        messageString+="<td>";
-//        if(message)
-//        {
-//            messageString+=message;
-//        }
-//        messageString+="</td><td>";
-//        if(description)
-//        {
-//            messageString+="["+description+"]";
-//        }
-//        messageString+="</td><td>";
-//        if(permalink)
-//        {
-//            messageString+="(<a href='"+permalink+"' target='_blank'>more</a>)";
-//        }
-//        messageString+='</td>';
-//
-//        messageString+='<td>'+DateTimeFromUnixTimeStamp(created_time)+'</td>';
+
         messageString+='</tr>';
 
         //update the table

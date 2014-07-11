@@ -32,7 +32,7 @@ else
     {
         //write out a row
         $row = "<tr><td><img src='".$friendArray['pic']."' /></td>";
-        $row .= "<td>Name: <a href='http://facebook.com/profile.php?id=".$friendArray['uid'];
+        $row .= "<td><a href='http://facebook.com/profile.php?id=".$friendArray['uid'];
         $row .= "' target='_blank'>".$friendArray['name']."</a>";
         $row .= "<br /><a href=statushistory.php?uid=".$friendArray['uid'].">Status History</a>";
         $row .= "</td><td>Friends:";
@@ -107,7 +107,7 @@ else
     {
         ///build table row in a message string
         var messageString = "<tr><td><img src='"+pic+"' /></td>";
-        messageString += "<td>Name: <a href='http://facebook.com/profile.php?id="+uid+"' target='_blank'>"+name+"</a>";
+        messageString += "<td><a href='http://facebook.com/profile.php?id="+uid+"' target='_blank'>"+name+"</a>";
         messageString += "<br /><a href=statushistory.php?uid="+uid+">Status History</a></td>";
         messageString += "<td>Friends:"+friend_count+"</td></tr>";
 

@@ -79,3 +79,18 @@ function CheckAccess($facebook)
     return $user_id;
 }
 
+/**
+ * This function checks the database connection
+ */
+function CheckDatabaseConnection()
+{
+    //connect to the database permissions https://panel.dreamhost.com/?tree=goodies.mysql&current_step=Index&next_step=ShowEditUser&usernamed=sk8creteordie
+    $hostname = "mysql.seattlerules.com";   // eg. mysql.yourdomain.com (unique)
+    $username = "sk8creteordie";   // the username specified when setting-up the database
+    $password = "di3@Crete";   // the password specified when setting-up the database
+    $database = "fbtextadmin";   // the database name chosen when setting-up the database (unique)
+
+    $link = mysql_connect($hostname,$username,$password);  //database connections are automatically closed
+    return mysql_select_db($database);
+}
+

@@ -22,6 +22,27 @@ else
     
     echo("<h2 style='color:red;'>this page reserved for testing purposes... it may get funky</h2>");
     
+    if(CheckDatabaseConnection())
+    {
+        echo('DATABASE CONNECTION SUCCEEDED');
+    }
+    else
+    {
+        echo('DATABASE CONNECTION FAILED');
+    }
+
+
+    
+    ////////////////////////////////////////////////////////////////////
+    //Database: FBTextAdmin	Table: USERS
+    //mysql insert query for user
+    //"INSERT INTO `FBTextAdmin`.`USERS` (`UID`, `USERNAME`, `NAME`) VALUES ('".$user_profile['id']."', '".$user_profile['username']."', '".$user_profile['name']."');"
+    //SELECT * FROM `USERS`
+    ////////////////////////////////////////////////////////////////////
+
+    
+    
+    
     ////////////////////////////////////////////////////////////////////
     // Upload a photo to a user’s profile
     // Your app needs publish_actions permission for this to work
