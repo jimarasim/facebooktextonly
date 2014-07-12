@@ -22,13 +22,13 @@ else
     
     echo("<h2 style='color:red;'>this page reserved for testing purposes... it may get funky</h2>");
     
-    if(CheckDatabaseConnection())
+    if(RunQuery("SELECT * FROM FBTextAdmin.USERS"))
     {
-        echo('DATABASE CONNECTION SUCCEEDED');
+        echo('DATABASE QUERY SUCCEEDED');
     }
     else
     {
-        echo('DATABASE CONNECTION FAILED');
+        echo('DATABASE QUERY FAILED');
     }
 
 
@@ -63,23 +63,23 @@ else
     ////////////////////////////////////////////////////////////////////
     //NON-BIASED NEWSFEED
     //display friends data
-    $friends = $facebook->api(array(
-        "method"    => "fql.query",
-        "query"     => "SELECT uid,name,username,pic FROM user WHERE uid IN (SELECT uid2 FROM friend WHERE uid1 = me()) ORDER BY name"
-    ));
-
-    
-    echo("<table id='currentStatusTable'>");
-    foreach ($friends as $friendArray) 
-    {
-        //write out a row
-        $row = "<tr><td><img src='".$friendArray['pic']."' /></td><td>UID:".$friendArray['uid']."</td>";
-        $row .= "<td>Name: <a href='http://facebook.com/profile.php?id=".$friendArray['uid'];
-        $row .= "' target='_blank'>".$friendArray['name']."</a></td>";
-        $row .= "</tr>";
-        echo ($row);
-    }
-    echo('</table>');
+//    $friends = $facebook->api(array(
+//        "method"    => "fql.query",
+//        "query"     => "SELECT uid,name,username,pic FROM user WHERE uid IN (SELECT uid2 FROM friend WHERE uid1 = me()) ORDER BY name"
+//    ));
+//
+//    
+//    echo("<table id='currentStatusTable'>");
+//    foreach ($friends as $friendArray) 
+//    {
+//        //write out a row
+//        $row = "<tr><td><img src='".$friendArray['pic']."' /></td><td>UID:".$friendArray['uid']."</td>";
+//        $row .= "<td>Name: <a href='http://facebook.com/profile.php?id=".$friendArray['uid'];
+//        $row .= "' target='_blank'>".$friendArray['name']."</a></td>";
+//        $row .= "</tr>";
+//        echo ($row);
+//    }
+//    echo('</table>');
     ////////////////////////////////////////////////////////////////////
 
   

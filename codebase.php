@@ -82,7 +82,7 @@ function CheckAccess($facebook)
 /**
  * This function checks the database connection
  */
-function CheckDatabaseConnection()
+function RunQuery($sqlQuery)
 {
     //connect to the database permissions https://panel.dreamhost.com/?tree=goodies.mysql&current_step=Index&next_step=ShowEditUser&usernamed=sk8creteordie
     $hostname = "mysql.seattlerules.com";   // eg. mysql.yourdomain.com (unique)
@@ -90,7 +90,48 @@ function CheckDatabaseConnection()
     $password = "di3@Crete";   // the password specified when setting-up the database
     $database = "fbtextadmin";   // the database name chosen when setting-up the database (unique)
 
-    $link = mysql_connect($hostname,$username,$password);  //database connections are automatically closed
-    return mysql_select_db($database);
+    try
+    {
+        //connect to the database server
+        $con = mysql_connect($hostname,$username,$password);  //database connections are automatically closed
+        
+        //select the database to use
+        $databaseSelected=mysql_select_db($database,$con);
+        
+        //check if the database was selected
+        if(!$databaseSelected)
+        {
+            return false;
+        }
+        //run the query
+        $result = mysql_query($sqlQuery, $con);
+
+        //check result
+        if (!$result) {
+            echo "COULD NOT QUERY DATABASE:".$database.".<br />";
+            echo "MYSQL ERROR:".mysql_error()."<br />";
+            return false;
+        }
+        else
+        {
+            echo "QUERY SUCCEEDED<br />";
+        }
+
+        //write out data
+        while ($row = mysql_fetch_assoc($result)) {
+            echo "UID:".$row['UID']." USERNAME:".$row['USERNAME']." NAME:".$row['NAME']." LASTLOGIN:".$row['LASTLOGIN']."<br />";
+        }
+
+        //release the result memory
+        mysql_free_result($result); 
+        
+        return true;
+    }
+    catch(Exception $ex)
+    {
+        echo("CONNECTION FAILED. EXCEPTION:".$ex->getMessage());
+        return false;
+    }
+    
 }
 
