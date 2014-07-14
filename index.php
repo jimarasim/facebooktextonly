@@ -22,6 +22,7 @@ else
     echo "User Name: " . $user_profile['username']."<br />";
     echo "Name: " . $user_profile['name']."<br />";
     echo "UID: " . $user_profile['id']."<br />";
+    echo "<br />This site will never have advertising nor anything for sale.<br />";
 
 
 

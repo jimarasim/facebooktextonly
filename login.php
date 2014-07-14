@@ -16,7 +16,7 @@ if(CheckAccess($facebook))
 ?>
     <hr>
     This site renders text only pages of your Facebook newsfeed and friends list.  Other features will be added as time goes on.<br />
-    Your data will not be stored or tracked by this site in any way.
+    This site will never have advertising nor anything for sale.
 </body></html>
 
 

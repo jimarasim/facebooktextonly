@@ -6,7 +6,6 @@ date_default_timezone_set("America/Los_Angeles");
 //facebook sdk directory
 $facebookSdkFolder = "facebook-php-sdk";
 
-
 //this projects home page
 $homePage = "index.php";
 
@@ -103,6 +102,7 @@ function RunQuery($sqlQuery)
         {
             return false;
         }
+        
         //run the query
         $result = mysql_query($sqlQuery, $con);
 
@@ -112,18 +112,20 @@ function RunQuery($sqlQuery)
             echo "MYSQL ERROR:".mysql_error()."<br />";
             return false;
         }
-        else
+
+        //if this was a SELECT query, write out the result
+        if(strpos(strtolower($sqlQuery),"select")===0)
         {
-            echo "QUERY SUCCEEDED<br />";
-        }
+            //write out data
+            echo("<div style='color:white;'>");
+            while ($row = mysql_fetch_assoc($result)) {
+                echo "UID:".$row['UID']." USERNAME:".$row['USERNAME']." NAME:".$row['NAME']." LASTLOGIN:".$row['LASTLOGIN']."<br />";
+            }
+            echo("</div>");
 
-        //write out data
-        while ($row = mysql_fetch_assoc($result)) {
-            echo "UID:".$row['UID']." USERNAME:".$row['USERNAME']." NAME:".$row['NAME']." LASTLOGIN:".$row['LASTLOGIN']."<br />";
+            //release the result memory
+            mysql_free_result($result); 
         }
-
-        //release the result memory
-        mysql_free_result($result); 
         
         return true;
     }
