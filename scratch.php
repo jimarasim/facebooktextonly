@@ -22,25 +22,8 @@ else
     
     echo("<h2 style='color:red;'>this page reserved for testing purposes... it may get funky</h2>");
     
-    //insert the user (note: queries are case sensitive)
-    if(RunQuery("INSERT INTO `fbtextadmin`.`FBUSERS`(`UID`, `USERNAME`, `NAME`) VALUES ('".$user_profile['id']."', '".$user_profile['username']."', '".$user_profile['name']."')"))
-    {
-        echo('INSERT SUCCEEDED<br />');
-    }
-    else
-    {
-        echo('INSERT FAILED<br />');
-    }
-    
     //run a query against private fb databse (note: queries are case sensitive)
-    if(RunQuery("SELECT * FROM fbtextadmin.FBUSERS"))
-    {
-        echo('DATABASE QUERY SUCCEEDED<br />');
-    }
-    else
-    {
-        echo('DATABASE QUERY FAILED<br />');
-    }
+    RunQuery("SELECT * FROM fbtextadmin.FBUSERS");
 
     ///photo publish from existing url example
     //https://developers.facebook.com/docs/graph-api/reference/v2.0/page/photos

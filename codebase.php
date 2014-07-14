@@ -108,8 +108,8 @@ function RunQuery($sqlQuery)
 
         //check result
         if (!$result) {
-            echo "COULD NOT QUERY DATABASE:".$database.".<br />";
-            echo "MYSQL ERROR:".mysql_error()."<br />";
+            echo "FAILED. SQL:".$sqlQuery.".<br />";
+            echo "ERROR:".mysql_error()."<br />";
             return false;
         }
 
@@ -131,7 +131,7 @@ function RunQuery($sqlQuery)
     }
     catch(Exception $ex)
     {
-        echo("CONNECTION FAILED. EXCEPTION:".$ex->getMessage());
+        echo("FAILED. SQL:".$sqlQuery." EXCEPTION:".$ex->getMessage());
         return false;
     }
     

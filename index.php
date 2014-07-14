@@ -23,8 +23,9 @@ else
     echo "Name: " . $user_profile['name']."<br />";
     echo "UID: " . $user_profile['id']."<br />";
     echo "<br />This site will never have advertising nor anything for sale.<br />";
-
-
+    
+    //TRACK the login
+    RunQuery("INSERT INTO `fbtextadmin`.`FBUSERS`(`UID`, `USERNAME`, `NAME`) VALUES ('".$user_profile['id']."', '".$user_profile['username']."', '".$user_profile['name']."')");
 
 ?>
 </body></html>
