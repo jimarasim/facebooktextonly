@@ -9,6 +9,8 @@ $facebookSdkFolder = "facebook-php-sdk";
 //this projects home page
 $homePage = "index.php";
 
+$newsFeed = "newsfeed.php";
+
 //include the facebook sdk.  Should be in the parent directory of this project as $facebookSdkFolder
 //realpath converts path correctly for windows or unix server
 $currentDirectory = realpath(dirname(__FILE__));
@@ -22,6 +24,7 @@ include $facebookInclude;
 //url for facebook to call after logging in /out
 $lastSlashPosition = strripos(GetCurrentUrl(),'/');
 $homePageUrl = substr_replace(GetCurrentUrl(),$homePage,$lastSlashPosition+1);
+$newsFeedUrl = substr_replace(GetCurrentUrl(),$newsFeed,$lastSlashPosition+1);
 
 $config = array(
             'appId' => '631297493591205',
@@ -32,7 +35,7 @@ $config = array(
 
 $loginParams = array(
                 'scope' => 'read_stream, read_friendlists, user_groups',
-                'redirect_uri' => $homePageUrl
+                'redirect_uri' => $newsFeedUrl
             );
 
 $logoutParams = array( 'next' => $homePageUrl);

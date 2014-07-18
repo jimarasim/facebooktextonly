@@ -21,7 +21,7 @@ function HeaderLinks()
     document.write("<hr><table><tr>");
     for(var i = 0; i < homeLinks.length; i++)
     {
-        document.write("<td><a href='"+homeLinks[i].ahref+"'>"+homeLinks[i].atext+"</a></td>");
+        document.write("<td><a id='headerlinks' href='"+homeLinks[i].ahref+"'>"+homeLinks[i].atext+"</a></td>");
     }
     document.write("</tr></table><hr>");
     

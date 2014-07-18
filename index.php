@@ -9,9 +9,6 @@ else
     //get facebook user identification
     $user_profile = $facebook->api('/me','GET');
     
-    //TRACK the login
-    RunQuery("INSERT INTO `fbtextadmin`.`FBUSERS`(`UID`, `USERNAME`, `NAME`) VALUES ('".$user_profile['id']."', '".$user_profile['username']."', '".$user_profile['name']."')");
-
 }
 ?>
 
