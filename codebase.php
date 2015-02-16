@@ -27,7 +27,7 @@ $homePageUrl = substr_replace(GetCurrentUrl(),$homePage,$lastSlashPosition+1);
 $newsFeedUrl = substr_replace(GetCurrentUrl(),$newsFeed,$lastSlashPosition+1);
 
 $config = array(
-            'appId' => '631297493591205',
+            'appId' => '427915760696916',
             'secret' => '70225208bbd0a6f7b0868486ddee1c77',
             'fileUpload' => false, // optional
             'allowSignedRequest' => false, // optional, but should be set to false for non-canvas apps
